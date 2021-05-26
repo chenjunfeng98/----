@@ -14,7 +14,7 @@ default : 执行代码4<br>
 }<br>
 
 2. 循环语句：<br>
-for(var i=0,i<10,i++){执行代码}<br>
+for(let i=0,i<10,i++){执行代码}<br>
 var i=0; while(i<10){执行代码}<br>
 var i=0; do {执行代码} while(i<10)<br>
 
@@ -36,5 +36,7 @@ DOM2级事件处理(默认事件冒泡)：a.addEventListener('click',function(){
 2. appendChild() 方法可向节点的子节点列表的末尾添加新的子节点。(<‘ul’>末尾添加新标签)
 3. setAttribute('class','msgBox') 的DOM方法给panel元素添加了一个值为msgBox 的class 类属性。
 4. b.onclick/textContent = function () :表示将函数赋值给变量的一个属性（点击/文本内容）->函数表达式
+5. b.getAttribute('class')->获取标签属性
+6. 只写函数名 say 返回的将会是 say方法本身，以字符串的形式表现出来。
 
 

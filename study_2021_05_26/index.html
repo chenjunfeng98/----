@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      background:yellow;
+      height: 500px;
+      width: 500px;
+    }
+    .a {
+        display: inline-block;
+        background: red;
+        height: 125px;
+        width: 125px;
+    }
+    .b {
+        display: inline-block;
+        background: blue;
+        height: 125px;
+        width: 125px;
+    }
+    .c {
+        display: inline-block;
+        background: green;
+        height: 125px;
+        width: 125px;
+    }
+    .d {
+        display: inline-block;
+        background: purple;
+        height: 125px;
+        width: 125px;
+    }
+  </style>
+</head>
+<body>
+  <div class='box'>
+    <button class='light'>变亮</button>
+  </div>
+  <div class='down'>
+      <span class='a'></span>
+      <span class='b'></span>
+      <span class='c'></span>
+      <span class='d'></span>
+  </div>
+</body>
+<script>
+    var button1 = document.querySelector('.light')
+    var button2 = document.querySelector('.box')
+    var a = document.querySelector('.a')
+    
+    button1.addEventListener('click',button3)
+    a.addEventListener('click',k)
+
+    function button3(){
+      if(button1.getAttribute('class')=='light'){
+        button1.setAttribute('class','dark')
+        button1.textContent='变暗'
+        button2.style.backgroundColor = 'green';
+      }
+      else {
+        button1.setAttribute('class','light')
+        button1.textContent='变亮'
+        button2.style.backgroundColor = 'yellow';
+      }
+    }
+
+    function k(){
+        var r = a.style.backgroundColor
+        button2.style.backgroundColor = r
+    }
+    
+</script>
+</html>

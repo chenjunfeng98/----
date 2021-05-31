@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双向绑定测试</title>
+</head>
+<body>
+
+        <input type="text" id='inputx' />
+        <h1 id='h1x'>123</h1>
+
+</body>
+    <script>
+
+        function gId(_n){
+            return document.getElementById(_n)
+        };
+        var _text = {
+            _t : '123456',
+            get x(){
+                return this._t
+            },
+            set x(_n){
+                gId('inputx').value = _n;
+                gId('h1x').innerHTML = _n;
+            }
+        };
+        document.addEventListener('keyup',function(e){
+            _text.x = e.target.value; })
+            
+    </script>
+</html>

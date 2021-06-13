@@ -6,24 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        div {
-            width: 200px;
-            height: 200px;
+        ul {
+            display: flex;
+
         }
-        .f_box {
-            background-color: red;
-            position: absolute;
-            left: 50%;
-        }
-        .s_box {
-            background-color: green;
+        li {
+            width: 100px;
+            height: 50px;
+            list-style: none;
+            border: 1px solid gray;
+            line-height: 50px;
+            text-align: center;
         }
 
-        
+        .bg {
+            background-color: red;
+            color: white;
+        }
+
+        .body div {
+            display: none;
+        }
     </style>
 </head>
 <body>
-        <div class='f_box'></div>
-        <div class='s_box'></div>
+    <div>
+        <div class='head'>
+            <ul>
+                <li class = 'bg'>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </div>
+        <div class='body'>
+            <div class='num1' style="display: block;">哈</div>
+            <div >哈哈</div>
+            <div>哈哈哈</div>
+            <div>哈哈哈哈</div>
+            <div>哈哈哈哈哈</div>
+        </div>
+    </div>
+
+    <button class='by'>哈哈哈哈</button><button class='xy'>点击</button>
 </body>
+<script>
+    var btn = document.querySelectorAll('li');
+    var text = document.querySelector('.body').querySelectorAll('div');
+    var test = document.querySelector('.xy');
+    var btt = document.querySelector('.by');
+    test.onclick=function(){
+        
+        var con = 0;
+        if(con%2==0){
+        btt.innerHTML = '2'; }
+        else{
+        btt.innerHTML = '1';}
+        }
+        
+    
+    
+    for(var i=0;i<btn.length;i++){
+        ///为所有li标签增加index属性
+        var flag = i;
+        btn[i].setAttribute('index',i);
+        ///去掉所有背景
+        btn[i].onclick = function (){
+            for(var i=0;i<btn.length;i++){
+                btn[i].className=''};
+            this.setAttribute('class','bg');
+            ///显示对应text
+            var index = this.getAttribute("index");
+            for(var i=0;i<btn.length;i++){
+                text[i].style.display='none'};
+            text[index].style.display ='block'
+        };
+
+    }
+
+
+</script>
 </html>

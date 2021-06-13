@@ -43,8 +43,8 @@ return true;<br>
 2. a.innerHTML属性(效果textContent)
 innerHTML主要的作用是在标签中设置新的html标签内容，是有标签效果的。
 innerHTML与innerText 的区别：<br>
-innerHTML：获取标签中间的所有内容(包括标签下的标签);<br>
-innerText：获取标签中间的文本内容,但是标签中如果还有标签,那么最里面的标签的文本内容也能获取；
+innerHTML：起始位置到终止位置的全部内容，识别标签，包括html标签，同时保留空格和换行;<br>
+innerText：起始位置到终止位置的内容，不识别标签，但他去除html标签，同时空格和换行也会去掉；
 
 3. _x表示私有变量
 

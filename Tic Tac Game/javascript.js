@@ -12,7 +12,7 @@ const restart = ()=>{
 start.addEventListener('click', function(){
     for(let i=0;i<items.length;i++){
         items[i].innerHTML='';
-        items[i].disabled='';
+        items[i].disabled='';///有待商榷
         items[i].addEventListener('click',Click);
         flag=1;
         gameHistory=[];
@@ -74,7 +74,7 @@ const recoverFromHistory = (his) => {
     const h = his.find(item => Number(item.id) === Number(id));
     console.log(h);
     ///const his = his.find((his) => his.id === Number(index));
-    if (!h) {
+    if (!h) {//(三元表达式)
       item.innerHTML = '';
     } else {
       item.innerHTML = h.content;
@@ -83,7 +83,7 @@ const recoverFromHistory = (his) => {
 };
 
 
-///获胜规则
+///获胜规则(some/every)获胜即可弹出return
 function Winner(player){
   if(gameHistory.length>4){
   win.forEach(function(item){
@@ -92,7 +92,7 @@ function Winner(player){
       if(step.content===player){
           if(item.includes(Number(step.id))){
             a++;
-            if(a===3){
+            if(a===3){ //
               players.innerHTML=`Winner：${player}`
 
             };
@@ -104,7 +104,7 @@ function Winner(player){
 
 ///游戏执行函数
   const game=() => {
-    for(let i=0;i<items.length;i++){
+    for(let i=0;i<items.length;i++){ //&& ||
       items[i].addEventListener('click',Click);
       }};
 

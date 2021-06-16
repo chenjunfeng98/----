@@ -81,13 +81,8 @@ const recoverFromHistory = (his,index) => {
   for (let item of items) {
     const id = item.getAttribute('id')
     const h = his.find(item => Number(item.id) === Number(id));
-    if(!h){
-    item.innerHTML = '';
-    
-    }
-    else{item.innerHTML = h.content;
-    }
-    
+    !h?item.innerHTML = '':item.innerHTML = h.content
+
   };
 };
 

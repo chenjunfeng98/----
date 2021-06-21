@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <label>{{message}}</label>
+        <input type="text" placeholder="用户账号" key='user' v-if='isShow' >
+        <input type="text" placeholder="邮箱地址" key='email' v-else>
+        <button @click='change'>切换类型</button>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            message:'用户账号:',
+            test:true
+
+        },
+        computed:{
+            isShow(){
+                if(this.message=='用户账号:'){
+                    test=true
+                }else{
+                    test=false
+                }
+                return test
+            }
+        },
+        methods:{
+            change(){
+                if(this.message=='用户账号:'){
+                this.message='邮箱地址:'
+                }
+                else{
+                    this.message='用户账号:'
+                }
+            }
+        }
+
+    })
+</script>
+</html>

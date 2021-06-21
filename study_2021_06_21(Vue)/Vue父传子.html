@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ZN_CH">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <cqn1 :smovies='movies' :smessage='message'></cqn1>
+    </div>
+
+
+<template id='cqn'>
+    <div>
+        <h2>{{message}}</h2>
+        <ul>
+            <li v-for='item in smovies'>{{item}}</li>
+        </ul>
+    </div>
+</template>    
+</body>
+<script src="../vue.js"></script>
+<script>
+ let cqn1 = {
+    template:'#cqn',
+    data(){
+        return {
+            message:'你好阿'
+        }
+    },///组件赋值
+    props:{
+        smessage:{
+            default:'无参数'
+        },
+        smovies:{
+            default:'无参数'///若default为对象则：default(){return {}}
+        }
+    }///父传子值
+};
+const app = new Vue({
+    el:'#app',
+    data:{
+        message:'电影名单',
+        movies:['星际穿越','战争之王','爱在黎明破晓前']///父数据
+    },
+    components:{////局部组件
+        cqn1
+    }
+})
+</script>
+</html>

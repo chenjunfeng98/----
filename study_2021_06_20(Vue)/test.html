@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         .liClass {
+        color: #ff0000;
+    }
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <!-- <a v-bind:href="aHref">百度一下</a> -->
+        <!-- <h2 v-bind:class='{isActive:isactive,isPress:ispress}'>{{name}}</h2> -->
+        <!-- <button v-on:click='click'>点击</button> -->
+        <!-- <li v-for='(item, index) in movies' v-bind:class=getclass(index) v-on:click=liClick(index)>{{item}}</li> -->
+        <li >{{price}}</li>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    let app = new Vue({ 
+        el:'#app',
+        data:{
+            movies:['火影忍者','星际穿越','闻香识女人','上海堡垒'],
+            liclass:false,
+            index:2,
+            book:[
+                {id:110,name:'python',price:110},
+                {id:111,name:'javascript',price:90},
+                {id:112,name:'c#',price:66},
+            ]
+
+
+        },
+        computed:{
+            price(){
+                // let sum=0;
+                // for(let item of this.book){
+                //     sum+=item.price
+                // }
+                // return sum
+                let a = this.book.reduce((pre,item)=> item.price+pre.price);
+                return a
+            }
+        },
+        methods:{
+            liClick:function (index){
+                this.index = index;
+                console.log(index)
+
+            },
+            getclass:function (index) {
+               if(this.index == index){
+                return {liClass:!this.liclass}
+               }else{
+                return {liClass:this.liclass}
+               }
+            }
+            
+        }
+    })
+
+   
+
+</script>
+</html>

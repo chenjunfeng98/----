@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ZH_CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双向绑定</title>
+</head>
+<body>
+    <div id='app'>
+        <cpn :number1='num1' :number2='num2' @outnum1='getnum1' @outnum2='getnum2'>
+        </cpn>
+    </div>
+</body>
+<template id='cpn'>
+    <div>
+    <h2>{{number1}}</h2>
+    <input type="text" :value='dnumber1' @input='inputnum1'>
+    <h2>{{number2}}</h2>
+    <input type="text" :value='dnumber2' @input='inputnum2'>
+    </div>
+</template>
+<script src="../vue.js"></script>
+<script>
+    let cpn = {
+        template:'#cpn',
+        data() {
+            return {
+                dnumber1:this.number1,
+                dnumber2:this.number2
+            }
+        },
+        props:{
+            number1:Number,
+            number2:Number
+        },
+        methods:{
+            inputnum1(event){
+                this.dnumber1 = (event.target.value)*1;
+                this.$emit('outnum1',this.dnumber1);
+                this.dnumber2 = this.dnumber1 *100;
+                this.$emit('outnum2',this.dnumber2);
+            },
+            inputnum2(event){
+                this.dnumber2 = (event.target.value)*1;
+                this.$emit('outnum2',this.dnumber2);
+                this.dnumber1 = this.dnumber2 /100;
+                this.$emit('outnum1',this.dnumber1);
+            }      
+        }
+
+    };
+    let app = new Vue({
+        el:'#app',
+        data:{
+            num1:1,
+            num2:0
+        },
+        components:{
+            cpn:cpn
+        },
+        methods:{
+            getnum1(item){
+                this.num1 = item
+            },
+            getnum2(item){
+                this.num2 = item
+            }
+        }
+
+    })
+
+</script>
+</html>

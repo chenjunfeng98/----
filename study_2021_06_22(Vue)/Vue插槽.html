@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <div id="app">
+            <cpn>
+                <template v-slot:num1>
+                <button >按钮+</button>
+                </template>
+                <template v-slot:num2>
+                <div>插槽2</div>
+                </template>
+            </cpn>
+
+            <cpn>
+                <template v-slot='slot'>
+                    <span>{{slot.list.join('——')}}</span>
+                </template>
+            </cpn>
+        </div>
+</body>
+<template id='cpn'>
+    <div>
+        <h2>{{message}}</h2>
+        <slot :list='list'>
+        <li v-for='item in list' >{{item}}</li>
+        </slot>
+        <slot name='num1'>空值1</slot>
+        <slot name='num2'>空值2</slot>
+    </div>
+</template>
+<script src="../vue.js"></script>
+<script>
+    let cpn = {
+        template:'#cpn',
+        data(){
+            return {
+                message:'电影名单',
+                list:['星际穿越','正义联盟','爱在黎明破晓前']
+            }
+        }
+    };
+    let app =new Vue({
+        el:'#app',
+        components:{
+            cpn:cpn
+        }
+    })
+</script>
+</html>

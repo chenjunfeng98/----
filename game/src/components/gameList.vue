@@ -14,7 +14,7 @@ export default {
     props: ['player','steps'],
     methods: {
         gameInit(){
-            this.$emit('initgame')
+            this.$emit('initgame');
         }
     }
 

@@ -89,17 +89,20 @@ const recoverFromHistory = (his,index) => {
 
 ///获胜规则
 function Winner(player,hisList = gameHistory){
+  // if(hisList.length<=5){
+  //   return
+  // }else{
   const gameplayer = hisList.filter((item)=>{return item.content==player});//获取玩家历史记录
   const step = gameplayer.map(function(item){return Number(item.id)});//转化成数组
-  for(let i=0;i<win.length;i++){
-    const test=win[i].some((item)=> {
-    return step.indexOf(item)<0 });
-    if(!test){
+  let test=win.some(item=>item.every(val=>step.indexOf(val)>-1))
+
+    if(test){
       players.innerHTML=`Winner：${player}`
       hasWinner = true;
     };
     };
-  };
+  // }
+  
 
 ///游戏执行函数
   const game=() => {

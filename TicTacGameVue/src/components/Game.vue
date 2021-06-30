@@ -12,11 +12,11 @@
     </div>
     <!-- 子组件步骤列表 -->
     <gameList
-      :player="players"
-      :steps="initCount"
+      :listPlayer="grade"
       :gameCell="gameCount"
-      @initgame="initGame"
       :listHistory="gameHistory"
+      @initgame="initGame"
+      @reset="his"
     ></gameList>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
   name: "Game",
   data() {
     return {
-      initCount: 0, ///回合数
+      // initCount: 0, ///回合数
       gameHistory: [], ///历史记录
       isGame: true, ///盒子样式
       isCell: true, ///格子样式
@@ -43,8 +43,11 @@ export default {
         { id: "8", content: "" },
         { id: "9", content: "" }
       ], ///格子记录数
-      player: "", ///玩家
+      player: "O", ///玩家
       begin: true,
+      grade: `Next Player :X`,
+      viewModel:false,
+      resetstep:'',
       win: [
         [1, 2, 3],
         [4, 5, 6],
@@ -57,40 +60,28 @@ export default {
       ]
     };
   },
-  computed: {
-    players() {
-      if (!this.begin) {
-        return `Winner：${this.player}`;
-      } else {
-        return `Next Player :${this.initCount % 2 ? "O" : "X"}`;
-      }
-    }
-  },
+
   methods: {
     gameClick(item) {
       if (item.content !== "" || this.begin == false) {
         return;
-      } else {
-        this.player = this.initCount % 2 ? "O" : "X";
-        this.gameHistory.push(item);
-        item.content = this.player;
-        let gameplayer = this.gameHistory.filter(item => {
-          return item.content == this.player;
-        }); //获取玩家历史记录
-        let step = gameplayer.map(function(item) {
-          return Number(item.id);
-        }); //转化成数组
-        let test = this.win.some(item =>
-          item.every(val => step.indexOf(val) > -1)
-        ); ///判断成绩
-        if (test) {
-          this.begin = false;
-        }
-        this.initCount++;
       }
+      if(this.viewModel){
+      this.player = this.resetstep%2?'X':'O'
+      this.gameHistory.splice(this.resetstep)
+      this.viewModel=false
+      };
+      this.player = this.player == "O" ? "X" : "O";
+      this.gameHistory.push({ id: item.id, content: this.player });
+      item.content = this.player;
+      this.Winner(this.player);
+      this.grade = !this.begin
+        ? `Winner：${this.player}`
+        : (this.grade = `Next Player :${this.player}`);
+    
     },
+
     initGame() {
-      this.initCount = 0;
       this.gameHistory = [];
       this.gameCount = [
         { id: "1", content: "" },
@@ -104,8 +95,30 @@ export default {
         { id: "9", content: "" }
       ];
       this.begin = true;
+      this.player = "X";
+    },
+
+    his(value) {
+      this.viewModel=true;
+      this.resetstep = value
+    },
+
+
+
+    Winner(player){
+      let gameplayer = this.gameHistory.filter(item => {
+        return item.content == this.player;
+      }); //获取玩家历史记录
+      let step = gameplayer.map(item => Number(item.id)); //转化成数组
+      let test = this.win.some(item =>
+        item.every(val => step.indexOf(val) > -1)
+      ); ///判断成绩
+      if (test) {
+        this.begin = false;
+      }
     }
   },
+
   components: {
     gameList
   }

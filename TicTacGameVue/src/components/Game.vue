@@ -68,7 +68,9 @@ export default {
       }
       if(this.viewModel){
       this.player = this.resetstep%2?'X':'O'
-      this.gameHistory.splice(this.resetstep)
+      this.gameHistory.splice(this.resetstep);
+      console.log(this.resetstep)
+      console.log(this.player);
       this.viewModel=false
       };
       this.player = this.player == "O" ? "X" : "O";

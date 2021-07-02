@@ -25,7 +25,7 @@ export default {
         this.gameCell[i].content=!t?'':t.content
 
       };
-      this.$emit('reset',value)
+      this.$emit('reset',item)
     }
   }
 };

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <!-- <a href="#/user">用户界面</a>
-    <a href="#/">主界面</a> -->
-    <!-- <img src="./assets/logo.png"> -->
+    <!-- <router-link to='/home'>首页</router-link>
+    <router-link to='/about'>关于</router-link>
+    <router-link to='/Game'>游戏</router-link> -->
     <router-view/>
   </div>
 </template>

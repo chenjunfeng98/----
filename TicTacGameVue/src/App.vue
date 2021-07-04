@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <!-- <router-link to='/home'>首页</router-link>
-    <router-link to='/about'>关于</router-link>
-    <router-link to='/Game'>游戏</router-link> -->
+    <router-link to='/home'>首页</router-link>
+    <!-- <router-link :to='{path:"/about" ,query:{id:1,test:"ldh"}}'>关于</router-link> -->
     <router-view/>
   </div>
 </template>

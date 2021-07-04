@@ -2,37 +2,36 @@
   <div class="box">
     <div :class="{ game: isGame }">
       <div
-        v-for="item in gameCount"
+        v-for="item in GameCell"
         :key="item.id"
         :class="{ cell: isCell }"
-        @click="gameClick(item)"
+        @click="click_Cell(item)"
       >
         {{ item.content }}
       </div>
     </div>
     <!-- 子组件步骤列表 -->
     <gameList
-      :listPlayer="grade"
-      :gameCell="gameCount"
-      :listHistory="gameHistory"
-      @initgame="initGame"
-      @reset="his"
+      :Li_nextPlayer="NextPlayer"
+      :Li_GameCells="GameCell"
+      :Li_HistoryList="GameHistory"
+      @Li_InitGame="InitGame"
+      @Li_ResetStep="RollbackGame"
     ></gameList>
   </div>
 </template>
 
 <script>
-import gameList from "./gameList";
+import GameList from "./GameList";
 
 export default {
   name: "Game",
   data() {
     return {
-      // initCount: 0, ///回合数
-      gameHistory: [], ///历史记录
+      GameHistory: [], ///历史记录
       isGame: true, ///盒子样式
       isCell: true, ///格子样式
-      gameCount: [
+      GameCell: [
         { id: "1", content: "" },
         { id: "2", content: "" },
         { id: "3", content: "" },
@@ -44,11 +43,11 @@ export default {
         { id: "9", content: "" }
       ], ///格子记录数
       player: "O", ///玩家
-      begin: true,
-      grade: `Next Player :X`,
-      viewModel:false,
-      resetstep:'',
-      win: [
+      GameStatus: true,
+      NextPlayer: `Next Player :X`,
+      ResetCell:false,///允许修改格子
+      Resetstep:'',//返回步骤数
+      WinCases: [
         [1, 2, 3],
         [4, 5, 6],
         [7, 8, 9],
@@ -62,30 +61,28 @@ export default {
   },
 
   methods: {
-    gameClick(item) {
-      if (item.content !== "" || this.begin == false) {
+    click_Cell(item) {
+      if (item.content !== "" || this.GameStatus == false) {
         return;
       }
-      if(this.viewModel){
-      this.player = this.resetstep%2?'X':'O'
-      this.gameHistory.splice(this.resetstep);
-      console.log(this.resetstep)
-      console.log(this.player);
-      this.viewModel=false
+      if(this.ResetCell){
+      this.player = this.Resetstep % 2?'X':'O'
+      this.GameHistory.splice(this.Resetstep);
+      this.ResetCell = false
       };
       this.player = this.player == "O" ? "X" : "O";
-      this.gameHistory.push({ id: item.id, content: this.player });
+      this.GameHistory.push({ id: item.id, content: this.player });
       item.content = this.player;
-      this.Winner(this.player);
-      this.grade = !this.begin
+      this.IsWinner(this.player);
+      this.NextPlayer = !this.GameStatus
         ? `Winner：${this.player}`
-        : (this.grade = `Next Player :${this.player}`);
+        : (this.NextPlayer = `Next Player :${this.player}`);
     
     },
 
-    initGame() {
-      this.gameHistory = [];
-      this.gameCount = [
+    InitGame() {
+      this.GameHistory = [];
+      this.GameCell = [
         { id: "1", content: "" },
         { id: "2", content: "" },
         { id: "3", content: "" },
@@ -96,33 +93,27 @@ export default {
         { id: "8", content: "" },
         { id: "9", content: "" }
       ];
-      this.begin = true;
+      this.GameStatus = true;
       this.player = "X";
     },
 
-    his(value) {
-      this.viewModel=true;
-      this.resetstep = value
+    RollbackGame(value) {
+      this.ResetCell = true;
+      this.Resetstep = value
     },
 
-
-
-    Winner(player){
-      let gameplayer = this.gameHistory.filter(item => {
-        return item.content == this.player;
-      }); //获取玩家历史记录
+    IsWinner(player){
+      let gameplayer = this.GameHistory.filter(item =>item.content == this.player); //获取玩家历史记录
       let step = gameplayer.map(item => Number(item.id)); //转化成数组
-      let test = this.win.some(item =>
-        item.every(val => step.indexOf(val) > -1)
-      ); ///判断成绩
+      let test = this.WinCases.some(item =>item.every(val => step.indexOf(val) > -1)); ///判断成绩
       if (test) {
-        this.begin = false;
+        this.GameStatus = false;
       }
     }
   },
 
   components: {
-    gameList
+    GameList
   }
 };
 </script>

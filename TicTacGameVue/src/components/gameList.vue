@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div>{{listPlayer}}</div>
+    <div>{{Li_nextPlayer}}</div>
     <ol>
-      <li><button @click="gameInit">Go to game start</button></li>
-      <li v-for="(item,index) in listHistory" :key="index">
-        <button @click="resetGame(index+1)">Go to move#{{ index+1 }}</button>
+      <li><button @click="Li_InitGame">Go to game start</button></li>
+      <li v-for="(item,index) in Li_HistoryList" :key="index">
+        <button @click="Li_ResetGame(index+1)">Go to move#{{ index+1 }}</button>
       </li>
     </ol>
   </div>
@@ -12,20 +12,24 @@
 
 <script>
 export default {
-  name: "gameList",
-  props: ["listPlayer", "gameCell", "listHistory"],
+  name: "GameList",
+  props: {
+    Li_nextPlayer:String,
+    Li_GameCells:Array,
+    Li_HistoryList:Array
+  },
   methods: {
-    gameInit() {
-      this.$emit("initgame");
+    Li_InitGame() {
+      this.$emit("Li_InitGame");
     },
-    resetGame(item) {
-      let history = this.listHistory.slice(0,item);
-      for (let i = 0; i < this.gameCell.length; i++) {
-        let t = history.find(v=>this.gameCell[i].id==v.id)
-        this.gameCell[i].content=!t?'':t.content
+    Li_ResetGame(item) {
+      let SaveHistory = this.Li_HistoryList.slice(0,item);
+      for (let i = 0; i < this.Li_GameCells.length; i++) {
+        let t = SaveHistory.find(v=>this.Li_GameCells[i].id == v.id);
+        this.Li_GameCells[i].content=!t?'':t.content
 
       };
-      this.$emit('reset',item)
+      this.$emit('Li_ResetStep',item)
     }
   }
 };

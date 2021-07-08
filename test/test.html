@@ -1,94 +1,47 @@
 <!DOCTYPE html>
-<html >
+<html lang="ZH_CN">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            display: flex;
-            position: relative;
-        }
-
-        .left {
-            width: 95%;
-        }
-        .title {
-            height: 500px;
-            background-color: red;
-            
-        }
-
-        .main {
-            height: 500px;
-            background-color: green;
-             
-        }
-        .buttom {
-            height: 1000px;
-            background-color: blue;
-             
-        }
-        
-        .daohanlan {
-            top: 600px;
-            width: 5%;
-            height: 100px;
-            background-color:indigo;
-            position: absolute;
-            right: 0%;
-        }
-
-        .goback {
-            position:absolute;
-            bottom:0;
-            background-color:indigo;
-            display: none;
-            color: white;
-        }
-    </style>
 </head>
 <body>
-    <div class='left'>
-        <div class='title'>title</div>
-        <div class='main'>main</div>
-        <div class='buttom'>buttom</div>
-    
+    <div>
+        <label for="test">TodoList</label>
+        <input type="text" name='test' placeholder="test...">
+        <button>提交</button>
     </div>
-    
-    <div class='daohanlan'>
-        <span class='goback'>返回首页</span>
+    <div class='list'>
+        <ul>
+
+        </ul>
     </div>
-        
-
-
 </body>
 <script>
-    const daohanlan = document.querySelector('.daohanlan');
-    const main = document.querySelector('.main');
-    const goback = document.querySelector('.goback');
-    const mainy = main.offsetTop;
-    const daohanlany = daohanlan.offsetTop;
-    const result = daohanlany-mainy;
-    // const son = document.querySelector('.son');
-    document.addEventListener('scroll',function(){
-        if(window.pageYOffset>=mainy){
-            daohanlan.style.position='fixed';
-            daohanlan.style.top=result+'px';
-            goback.style.display = 'block'
+    let input = document.querySelector('input');
+    let list = document.querySelector('.list');
+    let ul = list.querySelector('ul');
+    let btn = document.querySelector('button');
+    btn.addEventListener('click',addli);
 
-        }else{
-            daohanlan.style.position='absolute';
-            daohanlan.style.top='600px';
-            goback.style.display = 'none'
 
-        };
-        
-    })
+    function addli(){
+        let li  = document.createElement('li');
+        let del = document.createElement('button');
+        del.innerHTML = 'Delete';
+        del.addEventListener('click',delLi);
+        li.innerHTML = input.value;
+        li.appendChild(del);
+        ul.appendChild(li);
+        input.value=''
+
+    };
+    function delLi(){
+        let a = this.parentNode;
+        console.log(a)
+        ul.removeChild(a);
+    }
+
 </script>
 </html>

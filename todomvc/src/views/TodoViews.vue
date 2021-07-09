@@ -3,34 +3,41 @@
     <div>todos</div>
     <input type="text" 
            placeholder="What need to be done ?" 
-           @keydown="addByEnterKey">
+           @keyup.enter="addByEnterKey">
+
     
-    <todo-list-page :list="inputlist"></todo-list-page>
+    <todo-list-page-2-0 :list="inputList"></todo-list-page-2-0>
     
   </div>
 </template>
 
 <script>
+
 // @ is an alias to /src
-const TodoListPage = () => import('../components/TodoListPage');
+const TodoListPage20 = () => import('../components/TodoListPage2.0');
+
 
 export default {
   name: 'TodoViews',
   components: {
-    TodoListPage
+    TodoListPage20,
+
+    
   },
   data () {
         return {
-            inputlist:[],
+            inputList:[],
+
         }
     },
     methods: {
-        addByEnterKey(event){           
-            if (event.keyCode == 13) {
-              this.inputlist.push(event.target.value);
-              event.target.value=''
-            }
+        addByEnterKey(event){ 
+              this.inputList.push({content:event.target.value,status:'All'})
+              event.target.value=''  
         },
+        change(value){
+          value.status=value.status=='All'?'Complete':'All'
+        }
 
     }
   

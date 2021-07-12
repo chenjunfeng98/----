@@ -3,7 +3,7 @@
         <button @click="click('All')" >All</button>
         <button @click="click('Active')" >Active</button>
         <button @click="click('Complete')" >Complete</button>
-        <button @click="click('Clear Completed')">Clear Completed</button>
+        <button @click="clear">Clear Completed</button>
     </div>
 </template>
 
@@ -13,6 +13,9 @@ export default {
     methods: {
         click(value){
             this.$emit('isShow',value);
+        },
+        clear(){
+            this.$emit('clear');
         }
     },
 

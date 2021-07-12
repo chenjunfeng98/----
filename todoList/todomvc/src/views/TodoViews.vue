@@ -32,12 +32,10 @@ export default {
     },
     methods: {
         addByEnterKey(event){ 
-              this.inputList.push({content:event.target.value,status:'All'})
+              this.inputList.push({content:event.target.value,isClicked:false})
               event.target.value=''  
         },
-        change(value){
-          value.status=value.status=='All'?'Complete':'All'
-        }
+
 
     }
   

@@ -5,6 +5,8 @@ import Home from '../components/Home'
 import About from '../components/About'
 import Prolife from '../components/Prolife'
 
+
+
 Vue.use(Router)
 
 export default new Router({

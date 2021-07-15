@@ -1,16 +1,21 @@
 <template>
   <div id="app">
-    <input type="checkbox" @click="checkAllItem">
-    <input type="text" placeholder="What need to be done ?" @keyup.enter="addMessage">
-
+    
+    <input type="checkbox" @click="checkAllMessage">
+    <input type="text" placeholder="What need to be done ?" @keyup.enter="addMessage" v-model="message">
     <router-view></router-view>
 
-    <div v-if="todoList.length">
-      <router-link :to="{name:'all',params:{content:this.todoList}}" tag="button">All</router-link>
+    <div>
+      <router-link :to="{name:'all'}" tag="button">All</router-link>
+      <router-link :to="{name:'active'}" tag="button">Active</router-link>
+      <router-link :to="{name:'complete'}" tag="button">Complete</router-link>
+      <!-- <router-link :to="{name:'all',params:{content:this.todoList}}" tag="button">All</router-link>
       <router-link :to="{name:'active',params:{content:this.todoList}}" tag="button">Active</router-link>
-      <router-link :to="{name:'complete',params:{content:this.todoList}}" tag="button">Complete</router-link>
-      <button @click="clearCompleteList">Clear Complete</button>
+      <router-link :to="{name:'complete',params:{content:this.todoList}}" tag="button">Complete</router-link> -->
+      <button @click="clearCompleteMessage">Clear Complete</button>
+      
     </div>
+    
   </div>
 </template>
 
@@ -21,24 +26,22 @@ export default {
   name:'App',
   data () {
     return {
-      todoList:[],
-      checkedAll:true,
+      // todoList:[],
+      message:'',
+      
     }
   },
   methods: {
-    addMessage(event){
-      this.todoList.push({content:event.target.value,isChecked:false});
-      event.target.value=''
+    addMessage(){
+      this.$store.commit('addMessage',this.message)
+      // this.todoList.push({content:event.target.value,isChecked:false});
+      this.message=''
     },
-    checkAllItem(){
-      this.todoList.forEach(item=>item.isChecked = this.checkedAll);
-      this.checkedAll = !this.checkedAll
+    checkAllMessage(){
+      this.$store.commit('checkAllMessage')
     },
-    clearCompleteList(){
-      this.todoList.forEach(item=>{
-        let completeList = this.todoList.filter(v=>v.isChecked);
-        completeList.forEach(item=>this.todoList.splice(this.todoList.indexOf(item),1))
-      })
+    clearCompleteMessage(){
+      this.$store.commit('clearCompleteMessage')
     }
   }
 }

@@ -10,22 +10,29 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path:'/all/:content',
+    path:'',
+    redirect: '/all'
+  },
+  {
+    // path:'/all/:content',
+    path:'/all',
     name:'all',
     component:todoMvcAllPage,
-    props: true
+    // props: true
   },
   {
-    path:'/active/:content',
+    // path:'/active/:content',
+    path:'/active',
     name:'active',
     component:todoMvcActivePage,
-    props: true
+    // props: true
   },
   {
-    path:'/complete/:content',
+    // path:'/complete/:content',
+    path:'/complete',
     name:'complete',
     component:todoMvcCompletePage,
-    props: true
+    // props: true
   },
 ]
 

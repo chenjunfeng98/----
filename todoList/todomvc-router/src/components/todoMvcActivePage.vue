@@ -1,10 +1,16 @@
 <template>
 <div>
-  <div v-for="(item,index) in activeList" :key="`${item}${index}`">
+  <div v-for="(item,index) in activeList" 
+        :key="`${item}${index}`">
+    <input type="checkbox" @click="handleChecked(item)" v-model="item.isChecked">
+    <span>{{item.content}}</span>
+    <button @click="reomveMessage(item)">×</button>
+  </div>
+  <!-- <div v-for="(item,index) in activeList" :key="`${item}${index}`">
       <input type="checkbox" @click="handleChecked(item)" v-model="item.isChecked">
       <span>{{item.content}}</span>
       <button @click="delItem(item)">×</button>
-  </div>
+  </div> -->
 </div>
 </template>
 
@@ -12,21 +18,25 @@
 <script>
 export default {
     name:'todoMvcActivePage',
-    props: {
-      content:Array
-    },
-    computed: {
+    // props: {
+    //   content:Array
+    // },
+    // computed: {
+    //   activeList(){
+    //     return this.content.filter(item=>!item.isChecked)
+    //   }
+    // },
+    computed:{
       activeList(){
-        return this.content.filter(item=>!item.isChecked)
+        return this.$store.getters.activeList
       }
     },
     methods: {
-      handleChecked(item){
-        item.isChecked = !item.isChecked;
+     handleChecked(item){
+        this.$store.commit('changeChecked',item);
       },
-      delItem(value){
-        let index = this.content.indexOf(value);
-        this.content.splice(index,1)
+      reomveMessage(item){
+        this.$store.commit('reomveMessage',item);
       }
     }
 }

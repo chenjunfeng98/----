@@ -3,10 +3,9 @@
     <div>todos</div>
     <input type="text" 
            placeholder="What need to be done ?" 
+           v-model="message"
            @keyup.enter="addByEnterKey">
-
-    
-    <todo-list-page-2-0 :list="inputList"></todo-list-page-2-0>
+    <todo-list-page :list="inputList"></todo-list-page>
     
   </div>
 </template>
@@ -14,31 +13,26 @@
 <script>
 
 // @ is an alias to /src
-const TodoListPage20 = () => import('../components/TodoListPage2.0');
+const TodoListPage = () => import('../components/TodoListPage');
 
 
 export default {
   name: 'TodoViews',
   components: {
-    TodoListPage20,
-
-    
-  },
+    TodoListPage
+      },
   data () {
         return {
             inputList:[],
-
+            message:''
         }
     },
     methods: {
-        addByEnterKey(event){ 
-              this.inputList.push({content:event.target.value,isClicked:false})
-              event.target.value=''  
+        addByEnterKey(){ 
+              this.inputList.push({content:this.message,isClicked:false})
+              this.message=''  
         },
-
-
-    }
-  
+    }  
 }
 
 </script>

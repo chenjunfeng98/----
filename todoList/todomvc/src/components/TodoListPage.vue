@@ -1,47 +1,21 @@
 <template>
-  <div>
-    <input type="checkbox" 
-          :v-model="Checked" 
-          @click="changeAllChecked()"
-          v-if="this.AllList.length">
+    <div>
+      <div v-for="(item,index) in showPage" 
+           :key="`${item}${index}`">
 
+          <input type="checkbox" 
+                 :checked='item.isClicked'
+                 @click="handleChange(item)"
+                 :key="item">
 
-        <div v-for='(item,index) in ShowList' :key="`${index}${index}`">
-          <input type="checkbox"
-                 @click="removeListItem(index)"
-                 v-model="CompleteLists"
-                 :value="item"
-                 >
-          <span >{{item.content}}</span>
-          <button @click="DelListitem(item)">×</button>
-        </div>
+          <span>{{item.content}}</span>
 
-      <!-- <div v-else-if="CompletePage">
-        <div v-for='(item,index) in CompleteList' :key="item">
-          <input type="checkbox" @click="RemoveCompleteListsItem(index)">
-          <span >{{item}}</span>
-          <button @click="DelListitem(item)">×</button>
-        </div>
+          <button @click="delItem(item)">×</button>
       </div>
 
-      <div v-else>
-        <div v-for='(item,index) in AllList' :key="item">
-          <input type="checkbox" 
-          v-model="CompleteLists" 
-          :value="item">
-          {{item}}
-          <button @click="RemoveAllListItem(index)">×</button>
-        </div>
-      </div> -->
-
-      <todo-list-btn @isShow="ShowPage" 
-                     :CompleteItem="CompleteLists"
-                     :AllItem="AllList"
-                     v-bind="$attrs"
-                     v-if="this.AllList.length">
+      <todo-list-btn @isShow="onShow" @clear="clearComplete">
       </todo-list-btn>
-  </div>
-  
+    </div>
 </template>
 
 <script>
@@ -55,69 +29,41 @@ export default {
     props: {
         list:Array,
     },
-    computed: {
-      ///创建(Active、Complete)Page的List
-      ActiveList(){
-        return this.AllList.filter(item=>this.CompleteList.indexOf(item)==-1)
-      },
-      CompleteList(){
-        return this.AllList.filter(item=>this.CompleteLists.indexOf(item)>=0)
-      },
-
-    },
     data () {
         return {
-            AllList:this.list,
-            ShowList:this.list,
-            CompleteLists:[],
-            Checked:false
+            showPage:this.list,
+            showType: 'All',
         }
     },
     methods: {
-        ///显示点击Page
-        ShowPage(value){
-            if(value=='All'){
-              this.ShowList=this.AllList
-            }
-            else if(value=='Active'){
-              this.ShowList=this.ActiveList
-            }else{
-              this.ShowList=this.CompleteList
-            }
-            
-            
+        handleChange(item){
+            item.isClicked = !item.isClicked;
+            this.getDisplayData()
         },
-        // ///移除AllList任务
-        // RemoveAllListItem(index){
-        //   this.AllList.splice(index,1)
-        // },
-        // ///移除CompleteListsList任务
-        // RemoveCompleteListsItem(index){
-        //   this.CompleteLists.splice(index,1)
-        // },
-        removeListItem(index){
-          let list=this.ShowList==this.AllList?this.AllList:this.CompleteLists
-          this.list.splice(index,1)
-        },
-        ///移除ActivePage、CompletePage任务
-        DelListitem(value){
-          let index=this.AllList.indexOf(value);
-          this.AllList.splice(index,1)
-        },
-        ///全选按钮点击
-        changeAllChecked() {
-        this.CompleteLists=this.Checked?[]:this.AllList
-		    }
-    },
-    ///全选按钮的切换
-    watch: {
-		    "CompleteLists": function() {
-				    this.Checked = this.CompleteLists.length == this.AllList.length ? true:false
-			
-		}
-	}
 
-    
+        onShow(value){
+            this.showType=value;
+            this.getDisplayData()
+        },
+        delItem(value){
+            let index = this.list.indexOf(value);
+            this.list.splice(index,1);
+            this.getDisplayData()
+        },
+        clearComplete(){
+            let isClick = this.list.filter(v=>v.isClicked==1);
+            isClick.forEach(item=>this.list.splice(this.list.indexOf(item),1))
+            this.getDisplayData()
+        },
+        getDisplayData(){
+        this.showPage =
+        this.showType == 'All'
+          ? this.list
+          : this.list.filter(
+              v => v.isClicked ==(this.showType=='Complete'))
+
+        }
+    }
 }
 </script>
 

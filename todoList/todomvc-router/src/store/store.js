@@ -8,22 +8,24 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state:{
         todoList:[],
-        ischeckedAll:true,
+        ischeckedAll:'',
     },
     mutations: {
         addMessage(state,Val){
+            if(Val=='')return
             state.todoList.push({content:Val,isChecked:false})
         },
-        changeChecked(state,Val){
-            let index = state.todoList.indexOf(Val);
-            state.todoList[index].isChecked = !state.todoList[index].isChecked
+        changeChecked(state,Val){        
+            state.todoList.forEach(item=>{
+                if(item == Val) item.isChecked = !item.isChecked
+            })    
         },
         reomveMessage(state,Val){
             let index = state.todoList.indexOf(Val);
             state.todoList.splice(index,1)
         },
         checkAllMessage(state){
-            state.todoList.forEach(item=>item.isChecked = state.ischeckedAll);
+            state.todoList.forEach(item=>item.isChecked = !state.ischeckedAll);
             state.ischeckedAll = !state.ischeckedAll
         },
         clearCompleteMessage(state){
@@ -38,6 +40,9 @@ const store = new Vuex.Store({
         },
         completeList(state){
             return state.todoList.filter(item=>item.isChecked)
+        },
+        checkAll(state){
+            return state.ischeckedAll = state.todoList.length !== 0?'':false
         }
     }
 })

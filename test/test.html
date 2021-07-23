@@ -1,47 +1,43 @@
 <!DOCTYPE html>
-<html lang="ZH_CN">
+<html >
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        /* .wp{
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } */
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            text-align: center;
+            line-height: 200px;
+            /* margin: 0 auto; */
+            
+            
+
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <label for="test">TodoList</label>
-        <input type="text" name='test' placeholder="test...">
-        <button>提交</button>
+    <div class='wp'>
+        <div class='box'>123</div>
     </div>
-    <div class='list'>
-        <ul>
-
-        </ul>
-    </div>
+    
 </body>
-<script>
-    let input = document.querySelector('input');
-    let list = document.querySelector('.list');
-    let ul = list.querySelector('ul');
-    let btn = document.querySelector('button');
-    btn.addEventListener('click',addli);
-
-
-    function addli(){
-        let li  = document.createElement('li');
-        let del = document.createElement('button');
-        del.innerHTML = 'Delete';
-        del.addEventListener('click',delLi);
-        li.innerHTML = input.value;
-        li.appendChild(del);
-        ul.appendChild(li);
-        input.value=''
-
-    };
-    function delLi(){
-        let a = this.parentNode;
-        console.log(a)
-        ul.removeChild(a);
-    }
-
-</script>
 </html>

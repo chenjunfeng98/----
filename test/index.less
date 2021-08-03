@@ -1,0 +1,75 @@
+@import "common.less";
+
+@baseSize:64;
+.el-row{
+    width: 100%;
+    height: (460rem / @baseSize);
+    background-color: blue;
+    margin: 0 auto;
+    max-width: (960rem / @baseSize);
+    
+    .headerContent{
+        display: flex;
+        justify-content: space-around;
+        .headerImg{
+            width: (409rem / @baseSize);
+            height: (448rem / @baseSize);
+            background-color: red;
+            img{
+                width: 100%;
+                
+            }
+        };
+
+        .headerText{
+            width: (392rem / @baseSize);
+            height: (403rem / @baseSize);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            h2{
+                width: 100%;
+                font-size: (32rem / @baseSize);
+                
+            };
+            span{
+                width: 100%;
+                font-size: (16rem / @baseSize);
+                height: (100rem / @baseSize);
+            };
+            .download{
+                display: flex;
+                justify-content: space-between;
+                .downloadImg{
+                    width: (145rem / @baseSize);
+                    img{
+                        width: 100%;
+                    }
+                };
+                .downloadButton{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-starts;
+                    .iosButton,.androidButton{
+
+                        height: (64rem / @baseSize);
+                        line-height: (64rem / @baseSize);
+                        .el-button{
+
+                            width: (194rem / @baseSize);
+                            height: (64rem / @baseSize);
+                            text-align: center;
+                        }
+                    }
+                        
+                        
+                    
+                }
+            }
+        }
+    }
+    
+
+    
+    
+}

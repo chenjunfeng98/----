@@ -1,0 +1,55 @@
+.mainHeader .el-row {
+  width: 100%;
+  height: 1.5625rem;
+  margin: 0 auto;
+  max-width: 15rem;
+  background-color: #f9f9f9;
+}
+.mainHeader .el-row .el-col {
+  padding: 0.6875rem 0 0.484375rem;
+  box-sizing: border-box;
+}
+.mainHeader .el-row .el-col .mainBanner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.390625rem;
+}
+.mainHeader .el-row .el-col .mainBanner span:last-of-type {
+  color: #ccc;
+}
+.mainText .el-row {
+  background-color: #f9f9f9;
+  height: 100%;
+}
+.mainText .el-row .el-col {
+  width: 33.33333333% !important;
+  padding: 0 0.234375rem;
+}
+.mainText .el-row .el-col .mainItem {
+  margin-bottom: 0.21875rem;
+}
+.mainText .el-row .el-col .mainItem .mainBox {
+  padding: 0.3125rem;
+  background-color: #fff;
+  font-size: 0.25rem;
+}
+.mainText .el-row .el-col .mainItem .mainBox img {
+  width: 100%;
+  margin-bottom: 0.21875rem;
+}
+.mainBtn .el-row {
+  height: 100%;
+  background-color: #f9f9f9;
+}
+.mainBtn .el-row .el-col {
+  width: 15rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.46875rem;
+}
+.mainBtn .el-row .el-col .el-button {
+  font-size: 0.3125rem !important;
+  width: 100%;
+}

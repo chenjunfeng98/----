@@ -1,7 +1,7 @@
 <template>
   <div class="header">
       <el-row type="flex" justify="center">
-        <el-col :span="24">
+        <el-col :md="18" :sm="24">
           <div class='headerContent'>
                 <div class='headerImg comeImg'>
                   <img src="../assets/phone_sample.png" alt="">

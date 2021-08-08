@@ -1,7 +1,7 @@
 <template>
   <div class='nav'>
         <el-row type="flex" justify="center" align="middle">
-          <el-col :span="24">
+          <el-col :md="18" :sm="24">
             <div class='navContent'>
               <div class='navLogo'>
                 <h1>

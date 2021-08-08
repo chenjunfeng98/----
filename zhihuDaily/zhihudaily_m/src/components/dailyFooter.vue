@@ -1,7 +1,7 @@
 <template>
   <div class="Footer">
       <el-row type="flex" justify="center" >
-        <el-col :span="24">
+        <el-col :md="18" :sm="24">
           <div class='footText'>
             <div>
             <p>知乎日报是一款拥有千万用户的资讯类客户端，每日提供来自知乎社区的精选问答，还有国内一流媒体的专栏特稿。</p>

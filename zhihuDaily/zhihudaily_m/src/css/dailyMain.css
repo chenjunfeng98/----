@@ -2,10 +2,10 @@
   width: 100%;
   height: 1.5625rem;
   margin: 0 auto;
-  max-width: 15rem;
   background-color: #f9f9f9;
 }
 .mainHeader .el-row .el-col {
+  background-color: #f9f9f9;
   padding: 0.6875rem 0 0.484375rem;
   box-sizing: border-box;
 }
@@ -23,13 +23,19 @@
   height: 100%;
 }
 .mainText .el-row .el-col {
-  width: 33.33333333% !important;
-  padding: 0 0.234375rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.mainText .el-row .el-col .el-col {
+  margin: 0 0.234375rem;
 }
 .mainText .el-row .el-col .mainItem {
+  width: 100%;
   margin-bottom: 0.21875rem;
 }
 .mainText .el-row .el-col .mainItem .mainBox {
+  width: 3.59375rem;
   padding: 0.3125rem;
   background-color: #fff;
   font-size: 0.25rem;

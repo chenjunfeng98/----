@@ -4,6 +4,9 @@
   background-color: #e5e5e5;
   font-size: 0.21875rem;
 }
+.Footer .el-row .el-col {
+  background-color: #e5e5e5;
+}
 .Footer .el-row .footText {
   padding-top: 0.46875rem;
   box-sizing: border-box;

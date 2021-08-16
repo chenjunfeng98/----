@@ -5,90 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    *{
-      margin: 0;
-      padding: 0;
-    }
-    .test{
-      width: 100%;
-      height: 1000px;
-      background-color: red;
-      overflow: auto;
-      /* position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      border: 10px solid blue;
-      margin: 20px;
-      padding: 30px; */
-    }
-    .test2{
-      width: 100%;
-      height: 500px;
-      background-color: yellow;
-      display: none;
-    }
-    .add{
-      width: 100%;
-      height: 500px;
-      background-color: green;
-    }
-  </style>
 </head>
 <body>
-    <div class="test">
-      123
-    </div>
-    <div class="test2">
-      456
-    </div>
-</body>
-<script>
-// =document.onmousewheel
-  // let test = document.querySelector('.test')
-  // test.onscroll=fn
   
-  // function fn(){
-  //   console.log("test.scrollTop被卷去的高度：",test.scrollTop)
-  //   console.log("test.scrollHeight元素内容的高度：",test.scrollHeight)///480
-  //   console.log("window.innerHeight视口的高度",window.innerHeight)///可见区域的高度
-  //   console.log("test.clientTop border的数值",test.clientTop)///border的数值
-  //   console.log("test.offsetHeight 只包含content+padding+border",test.offsetHeight)//包含content+padding+border的元素高度
-  //   console.log("test.clientHeight只包含content+padding",test.clientHeight)//包含content+padding的元素高度
-  //   console.log(test.offsetLeft)
-  // }
-  let yellow = document.querySelector('.test2');
-  let body = document.documentElement;
-  window.onscroll=scrollFunc;
-  let isLoading = false;
-  let time = 10;
-  let canRun = true;
-  function scrollFunc(){
-    let offsetHeight = document.documentElement.offsetHeight;///一整个html的高度
-    let scrollTop = document.documentElement.scrollTop;///卷去的高度
-    let innerheight = window.innerHeight;//可见区域的高度
-    let scrollheight = document.documentElement.scrollHeight;///内容的总高度
-    let result = offsetHeight-scrollTop-innerheight<=200;
-    
-    if(result && isLoading === false && time>=0){
-      if(!canRun){
-        return
-      };
-      canRun = false;
-      setTimeout(()=>{
-      let div = document.createElement('div');
-      div.setAttribute('class','add');
-      div.innerHTML=time;
-      time -=1;
-      console.log(time)
-      body.appendChild(div);
-      canRun = true;
-        },500)
-
-    }
-    console.log("outsideTime:",time)
-    
-  }
-  </script>
+</body>
+<script src="./js.js"></script>
 </html>

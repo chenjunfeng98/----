@@ -1,68 +1,131 @@
-var that
-class Tab {
-    constructor(id){
-        that = this;
-        this.main = document.querySelector(id);
-        this.content = this.main.querySelector('.content');
-        this.btn = this.main.querySelector('.title button');
-        this.list = this.main.querySelector('.title ul');
-        this.init();
-    }
-    //绑定事件
-    init() {
-        this.updateNode();
-        for(let i=0;i<this.lis.length;i++){
-            this.lis[i].index = i;
-            this.lis[i].onclick = this.toggleTab;
-            this.icon[i].onclick = this.removeTab;
+const PENGDING = 'PENGDING',
+      FULFILLED = 'FULFILLED',
+      REJECTED = 'REJECTED';
+
+class MyPromise {
+    constructor(executor){
+        this.status = PENGDING;
+        this.value = undefined;
+        this.onFulfilledCallbacks = [];
+        this.onRejectCallbacks = [];
+
+        const resolve = (value)=>{
+            if(this.status === 'PENGDING'){
+                this.status = FULFILLED;
+                this.value = value;
+                setTimeout(()=>{
+                    try {
+                        this.onFulfilledCallbacks.forEach(fn=>fn(this.value))
+                    } catch (error) {
+                        this.onRejectCallbacks.forEach(fn=>fn(error))
+                    }
+                })
+            }
         };
-            this.btn.onclick = this.add;
+        const reject = (value)=>{
+            if(this.status === 'PENGDING'){
+                this.status = REJECTED;
+                this.value = value;
+                setTimeout(()=>{
+                    this.onRejectCallbacks.forEach(fn=>fn(this.value))
+                })
+            }
+        };
+        try {
+            executor(resolve,reject);
+        } 
+        catch (error) {
+            reject(error)
+        } 
     }
-    //重新获取li、section数量
-    updateNode() {
-        this.lis = this.main.querySelectorAll('li');
-        this.sections = this.main.querySelectorAll('section');
-        this.icon = this.main.querySelectorAll('.icon');
-    }
-
-    clearicon(){
-
-        for(let i=0;i<this.lis.length;i++){
-            this.lis[i].className = '';
-            this.sections[i].className='';
+    ///let promise...
+    then(ONFULFILLED,ONREJECTED){
+        if(typeof ONFULFILLED !=='function' ){
+            ONFULFILLED=()=>this.value
         }
-    }
-    //1. 切换功能
-    toggleTab() {
-            that.clearicon();
-            this.className = 'click';
-            that.sections[this.index].className = 'appear';        
-    }
-    //2. 添加功能
-    add() {
-        that.clearicon();
-        let li = "<li class='click'><span>test</span><span class='icon'>x</span></li>";
-        let sce = "<section class='appear'>content</section>";
-        that.list.insertAdjacentHTML('beforeend',li);
-        that.content.insertAdjacentHTML('beforeend',sce);
-        that.init();
-    }
+        if(typeof ONREJECTED !=='function' ){
+            ONREJECTED=()=>{throw this.value}
+        }
+        return new MyPromise((resolve,reject)=>{
+            if(this.status === 'FULFILLED'){
+                setTimeout(()=>{
+                    try {
+                        let result = ONFULFILLED(this.value);
+                        if(result instanceof MyPromise){
+                            result.then(resolve,reject)///下个then的onfulfilled/onrejected
+                        }else{
+                            resolve(result)
+                        }
+                    } catch (error) {
+                        reject(error)
+                    }
+                    
+                })
+            }
+            if(this.status === 'REJECTED'){
+                    setTimeout(()=>{
+                        try {
+                            let result = ONREJECTED(this.value);
+                            resolve(result)
+                        } catch (error) {
+                            reject(error)
+                        }
+                        
+                    })
+            }
+            if(this.status === 'PENGDING'){
+                 this.onFulfilledCallbacks.push(
+                    (value)=>{let result = ONFULFILLED(value) ;
+                                resolve(result)});
 
-    //3. 删除功能
-    removeTab(e){
-        e.stopPropagation();
-        let index = this.parentNode.index;
-        that.lis[index].remove();
-        that.sections[index].remove();
-        that.init();
-        if(document.querySelector('.click')) return
-        index--;
-        that.lis[index] &&that.lis[index].click();
-    }
+                this.onRejectCallbacks.push(
+                    (value)=>{let result = ONREJECTED(value) ;
+                                resolve(result)});
+                
+            }
+        })
 
+    }
     
 }
 
+let mypromise = new MyPromise((resolve,reject)=>{
+    // setTimeout(()=>{
+    //     // reject('error');
+    //     // throw new Error('newerror')
+    //     console.log('test')
+    //     reject('error')
+        
+    // })
+    // reject('error');
+    resolve('success!!!')
+    // console.log(sad)
+})
 
+mypromise
+// .then()
+.then((value)=>{ return new MyPromise((resolve,reject)=>{reject('reject123')})},(reason)=>{console.log('reject'+reason)})
+.then(value=>console.log(value),reason=>{console.log('reject2'+reason)})
+// .then(value=>console.log(value))
+// console.log(mypromise)
+// function test(reason){
+//     console.log(reason)
+// }
 
-new Tab('#tab')
+// let o = new Promise((resolve,reject)=>{
+//     // setTimeout(()=>{
+//     // resolve('success')//setTimeout
+//     // console.log('test')
+//     // },2000)
+//     reject('success')
+//     // console.log(222)
+//     })
+
+// o.then().then(value=>console.log(value),reason=>console.log('reject'+reason));
+// console.log('test1111')
+
+static reject(){
+    return new MyPromise(resolve,reject){
+        reject(reason)
+    }
+}

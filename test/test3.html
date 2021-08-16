@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ZH_CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .test{
+            width: 100%;
+            height: 2000px;
+            background-color: blue;
+        }
+        .add{
+            width: 100%;
+            height: 500px;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="test">
+        123
+    </div>
+</body>
+<script>
+    let div = document.querySelector('.test');
+    let body = document.querySelector('body')
+    let canRun = true;
+    let a = null;
+    let single = [1,3,5,7,8,10,12]
+
+    function formateTime(){
+            let t = new Date();
+            if( a !== null){
+                let lastDay = a[2]-1;
+                if(lastDay<=0){
+                    let hisDate = new Date(a[0],a[1],a[2])
+                    // console.log(a[0],a[1],a[2])
+                    hisDate.setDate(0)
+                    console.log(new Date( hisDate.setDate(0)).toLocaleString())
+                    let hisMonth = (new Date(hisDate).getMonth()+1) < 10 ?`0${new Date(hisDate).getMonth()+1}` : new Date(hisDate).getMonth()+1;
+                    let hisDays = (new Date(hisDate).getDate()) < 10 ? `0${new Date(hisDate).getDate()}` : new Date(hisDate).getDate();
+                    // console.log(`hisMonth${hisMonth}hisDays${hisDays}`)
+                    return a = [new Date(hisDate).getFullYear(),hisMonth,hisDays]
+
+                }          
+                return a[2] = lastDay;
+            };
+            let year = t.getFullYear();
+            let month = t.getMonth()+1;
+            month =  month < 10 ? `0${month}` : month;
+            let day = t.getDate();
+            day =  day < 10 ? `0${day}` : day;
+            let res = [year,month,day];
+            return a = res
+    };
+
+    for(let i=0;i<180;i++){
+        formateTime();
+        console.log(a)
+
+    }
+    // let c = formateTime()
+    // console.log(c)
+    // window.onscroll=fn;
+    // function fn(){
+    //     let offsetHeight = document.documentElement.offsetHeight;///一整个html的高度
+    //     let scrollTop = document.documentElement.scrollTop;///卷去的高度
+    //     let innerheight = window.innerHeight;//可见区域的高度
+    //     let scrollheight = document.documentElement.scrollHeight;///内容的总高度
+    //     let result = offsetHeight-scrollTop-innerheight<=200;
+    //     if(result){
+    //         if(!canRun){
+    //         return
+    //         };
+    //         canRun = false;
+    //         setTimeout(()=>{
+    //             let div = document.createElement('div');
+    //             div.setAttribute('class','add');
+    //             formateTime();
+    //             div.innerHTML = a;
+    //             body.appendChild(div);
+    //             console.log(a)
+    //             canRun = true;
+    //         },100)
+    //     }
+            
+
+    // }
+
+
+    
+    // let b = formateTime();
+    // console.log(b.join(''));
+    
+    // let b = formateTime(test)
+    // console.log(`b${b}`)
+    
+
+
+</script>
+</html>

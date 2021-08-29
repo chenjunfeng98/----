@@ -7,11 +7,27 @@ const {getId,addId} = require('./module/index');
 
 const dbpath = path.join(__dirname,'./db.json')
 const app = express();
+    // app.use(express.logger('dev'));//express日志
+    // app.use(app.router);//express路由
+    app.use(express.static(__dirname+'/public'));//静态资源路径
+    // app.use(express.errorHandler())//打印错误
 ///配置解析表单请求体：(数据格式)application / json
 //.json()将客户端上传的参数按照就json格式转化成js对象
 app.use(express.json())
 ///配置解析表单请求体：(数据格式)application / x-www-form-urlencoded
 app.use(express.urlencoded())
+
+
+app.post('/login',(req,res)=>{
+    if(req.query.userName == 'admin'){
+        res.redirect('login.html')
+    }else{
+        res.send('<h1>登录失败<h1>')
+    }
+
+
+})
+
 
 //获取数据
 app.get('/todos',async (req,res)=>{

@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/ZhihuDailyHome/ZhihuDailyHome",
+    "pages/ZhihuDailyDetail/ZhihuDailyContent"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "知乎日报",
+    "navigationBarBackgroundColor": "#008bed",
+    "backgroundColor": "#F8F8F8"
+  },
+  "usingComponents": {}
+}

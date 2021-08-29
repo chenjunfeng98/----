@@ -7,9 +7,6 @@
 <script>
 	
 	export default {
-		components:{
-			ZhihuDailyFooter
-		},
 		data() {
 			return {
 				zhihuStory: ''

@@ -1,12 +1,17 @@
 <template>
 	<view>
 		<view v-html="zhihuStory.body"></view>
+		<zhihu-daily-footer></zhihu-daily-footer>
 	</view>
 </template>
 
 <script>
+	import ZhihuDailyFooter from '../../components/ZhihuDailyFooter/ZhihuDailyFooter.vue'
 	
 	export default {
+		components:{
+			ZhihuDailyFooter
+		},
 		data() {
 			return {
 				zhihuStory: ''

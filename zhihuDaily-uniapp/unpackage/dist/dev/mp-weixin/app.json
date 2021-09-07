@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/ZhihuDailyHome/ZhihuDailyHome",
-    "pages/ZhihuDailyDetail/ZhihuDailyContent"
+    "pages/ZhihuDailyDetail/ZhihuDailyContent",
+    "components/ZhihuDailyFooter/ZhihuDailyFooter"
   ],
   "subPackages": [],
   "window": {

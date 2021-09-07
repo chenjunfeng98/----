@@ -1,5 +1,6 @@
 <template>
 	<view>
+	
 		<zhihu-daily-header :zhihuDate="zhihuDate"></zhihu-daily-header>
 		<zhihu-daily-banner :zhihuTopData="zhihuTopData"></zhihu-daily-banner>
 		<view v-for="item in zhihuData" :key="item.id" class='zhihuItem' @click="jump(item)" >
@@ -17,7 +18,7 @@
 <script>
 	import ZhihuDailyBanner from '../../components/ZhihuDailyHome/ZhihuDailyBanner.vue';
 	import ZhihuDailyHeader from '../../components/ZhihuDailyHome/ZhihuDailyHeader.vue';
-	
+
 	export default {
 		name:"ZhihuDailyHome",
 		components:{
@@ -81,7 +82,7 @@
 			
 			jump(item){
 				uni.navigateTo({
-					url:`../zhihuDailyDetail/zhihuDailyContent?storyid=${item.id}`
+					url:`../ZhihuDailyDetail/ZhihuDailyContent?storyid=${item.id}`
 				})
 			}
 		},

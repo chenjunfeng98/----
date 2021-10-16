@@ -1,0 +1,24 @@
+npm
+
+-S ：生产时依赖;
+-Dev：开发时依赖;
+
+
+package-lock.json ->npm包中的依赖关系;
+可用命令 npm list 获取npm包中的树形依赖关系;
+
+npm list | grep 包名(jquery) ->获取单个包的树形依赖关系；
+
+npm i --production ->只安装生产环境的包
+
+npm view 包名(jquery) versions -> 查看包的版本
+
+npm i 包名(jquery@2.2.4) -S ->安装不同版本的包
+
+^：锁定主版本号；
+~：锁定主版本号和次版本号；
+
+npm cache clean --force ->清空npm缓存
+
+
+process.env.npm_package_config_(属性名:script...)env ->获取package中的属性
